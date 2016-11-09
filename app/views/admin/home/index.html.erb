@@ -1,0 +1,33 @@
+<section class="padding_top_100px">
+  <div class="container">
+    <div class="col-sm-12">
+
+      <div class="col-sm-6">
+        <% @users.each do |user| %>
+          <div class="col-sm-12 no_side_padding">
+            <%= user.email %>
+            <%= user.first_name %>
+            <%= user.last_name %>
+            <%= user.phone %>
+            <%= image_tag(user.avatar.url, class: "img-responsive") %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-sm-6">
+        <% @ads.each do |ad| %>
+          <div class="col-sm-12 no_side_padding">
+            <%= ad.title %>
+            <%= ad.description %>
+            <%= ad.phone %>
+            <%= ad.phone_additional %>
+            <%= ad.price %>
+            <%= ad.email %>
+            <%= ad.website %>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</section>

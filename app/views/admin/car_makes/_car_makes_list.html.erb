@@ -1,0 +1,17 @@
+<% car_makes.each_slice(3) do |car_make_row| %>
+  <div class="col-sm-12 no_side_padding padding_top_20px">
+    <% car_make_row.each do |car_make| %>
+      <div class="col-sm-4 padding_top_20px">
+        <span class="block font_size_18px padding_bottom_10px">
+          <%= car_make.name %>
+        </span>
+
+        <% car_make.car_models.each do |model| %>
+          <span class="block font_size_16px padding_top_5px">
+            <%= model.name %>
+          </span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

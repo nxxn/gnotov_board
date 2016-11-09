@@ -1,0 +1,24 @@
+<section class="padding_top_100px padding_bottom_100px">
+  <div class="container">
+    <div class="col-sm-12">
+
+      <%= @ad.title %>
+      <%= @ad.description %>
+      <%= @ad.phone %>
+      <%= @ad.phone_additional %>
+      <%= @ad.price %>
+      <%= @ad.email %>
+      <%= @ad.website %>
+
+      <% @ad.ad_photos.each_slice(4) do |photo_slice| %>
+        <div class="col-sm-12">
+          <% photo_slice.each do |ad_photo| %>
+            <div class="col-sm-3">
+              <%= image_tag(ad_photo.image(:thumb), class: "img-responsive") %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

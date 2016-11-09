@@ -1,0 +1,60 @@
+<section>
+  <div class="container">
+    <div class="col-sm-12 font_size_36px padding_top_50px text-center">
+      Ads
+    </div>
+
+    <div class="col-sm-12 padding_top_30px padding_bottom_30px">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>User</th>
+            <th>Title</th>
+            <th class="text-right">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @ads.each_with_index do |ad, index| %>
+            <tr class="<%= ad.paid? ? 'green_background' : '' %>">
+              <th scope="row">
+                <%= @ads.length - 1 - index %>
+              </th>
+
+              <td>
+                <%= ad.user.email %>
+              </td>
+
+              <td>
+                <%= ad.title %>
+              </td>
+
+              <td class="text-right admin_table_actions">
+                <%= link_to admin_stop_ad_path(id: ad.id), class: "padding_left_right_10px font_size_18px" do %>
+                  <% if ad.active? %>
+                    <i class="fa fa-ban red_text" aria-hidden="true"></i>
+                  <% else %>
+                    <i class="fa fa-play green_text" aria-hidden="true"></i>
+                  <% end %>
+                <% end %>
+                |
+                <%= link_to edit_admin_ad_path(ad), class: "padding_left_right_10px font_size_18px" do %>
+                  <i class="fa fa-pencil orange_text" aria-hidden="true"></i>
+                <% end %>
+                |
+                <%= link_to admin_ad_path(ad), class: "padding_left_right_10px font_size_18px", method: :delete do %>
+                  <i class="fa fa-trash-o black_text" aria-hidden="true"></i>
+                <% end %>
+                |
+                <%= link_to admin_was_paid_path(id: ad.id), class: "#{ ad.paid? ? 'padding_left_10px padding_right_5px font_size_18px disabled' : 'padding_left_10px padding_right_5px font_size_18px' }" do %>
+                  <i class="fa fa-usd dark_green_text" aria-hidden="true"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

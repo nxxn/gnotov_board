@@ -1,0 +1,60 @@
+<script type="text/javascript">
+  var AUTH_TOKEN=$('meta[name="csrf-token"]').attr('content');
+  console.log("test");
+  console.log(AUTH_TOKEN);
+  // disable auto discover
+  Dropzone.autoDiscover = false;
+
+  // grap our upload form by its id
+  var myDropzone = new Dropzone("#myForm",{
+    url: "/uploadfiles",
+    // restrict image size to a maximum 1MB
+    maxFilesize: 10,
+    // changed the passed param to one accepted by
+    // our rails app
+    paramName: "images[]",
+    // show remove links on each image upload
+    addRemoveLinks: true,
+    parallelUploads: 15,
+    params:{
+      'authenticity_token':  AUTH_TOKEN
+    },
+
+    success: function(file, response){
+      // find the remove button link of the uploaded file and give it an id
+      // based of the fileID response from the server
+      $(file.previewTemplate).find('.dz-remove').attr('id', response.fileID);
+      // add the dz-success class (the green tick sign)
+      $(file.previewElement).addClass("dz-success");
+    },
+    //when the remove button is clicked
+    removedfile: function(file){
+      // grap the id of the uploaded file we set earlier
+      var id = $(file.previewTemplate).find('.dz-remove').attr('id');
+      $(file.previewTemplate).remove();
+
+      // make a DELETE ajax request to delete the file
+      $.ajax({
+        type: 'DELETE',
+        url: '/ads/' + id,
+        success: function(data){
+          console.log(data.message);
+        }
+      });
+    }
+  });
+
+  myDropzone.on("sending", function (file, xhr, formData) {
+    console.log("11");
+    // Disable the submit button
+    $(".ad_submit_btn").prop("disabled", true);
+    $(".ad_submit_btn").val("<%= t('disable') %>");
+  });
+
+  myDropzone.on("queuecomplete", function ( ) {
+      console.log("22");
+      // Re-enable the submit button
+      $(".ad_submit_btn").prop("disabled", false);
+      $(".ad_submit_btn").val("<%= t('create') %>");
+  });
+</script>

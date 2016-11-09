@@ -1,0 +1,15 @@
+<fieldset class="">
+  <%= f.input :mileage, label: "" %>
+  <%= f.input :built_year, as: :string, label: "" %>
+  <%= f.input :built_month, collection: 01..12, prompt: "Месяц выпуска авто", label: "" %>
+  <%= f.input :inspection_year, collection: (Date.today.year-2)..(Date.today.year), prompt: "ТО до года", label: "" %>
+  <%= f.input :inspection_month, collection: 01..12, prompt: "ТО до месяца", label: "" %>
+  <%= f.input :power, as: :string, label: "" %>
+  <%= f.input :gearbox, collection: [ ["Автомат", "auto"], ["Ручная", "manual"] ], prompt: "Выберите тип коробки" %>
+  <%= f.input :engine_cc, as: :string, label: "" %>
+  <%= f.input :engine_type, collection: [ ["Дизель", "diesel"], ["Бензин", "gas"], ["Газ / Бензин", "lpg"], ["Гибрид", "hybrid"], ["Электрокар", "electro"] ], prompt: "Выберите тип двигателя", label: "" %>
+  <%= f.input :new_car, label: "Jauna masina?" %>
+  <%= f.input :vin_number, label: "" %>
+  <%= f.input :color, collection: [ ["Белый", "white"], ["Чёрный", "black"], ["Бордовый", "bordo"], ["Голубой", "light_blue"], ["Жёлтый", "yellow"], ["Зелёный", "green"], ["Коричневый", "brown"], ["Красный", "red"], ["Оранжевый", "orange"], ["Серебряный", "silver"], ["Серый", "grey"], ["Синий", "blue"], ["Фиолетовый", "violet"] ], prompt: "Выберите цвет авто", label: "" %>
+  <%= f.input :body_type, collection: [ ["Седан", "sedan"], ["Универсал", "tourinf"], ["Купе", "coupe"], ["Хэтчбэк", "hatch"], ["Кабриолет", "cabrio"], ["Минивэн", "minivan"], ["Внедорожник", "offroad"] ], prompt: "Выберите тип кузова", label: "" %>
+</fieldset>

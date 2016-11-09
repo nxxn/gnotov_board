@@ -1,0 +1,41 @@
+<!-- Modal -->
+<div class="modal fade" id="servicesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <%= image_tag("icons/close.png") %>
+        </button>
+
+        <div class="col-sm-12 font_size_36px text-center font_weight_600 margin_top_40px">
+          <span class="block">Жалоба</span>
+
+          <div class="btn-group">
+            <hr class="hr_red">
+          </div>
+        </div>
+
+        <div class="col-sm-12 padding_top_50px font_weight_600 padding_left_right_80px padding_bottom_60px">
+          <%= simple_form_for @ad_issue, url: new_ad_issue_path do |f| %>
+            <%= f.error_notification %>
+
+            <%= f.input :user_id, input_html: { value: current_user.id }, as: :hidden %>
+            <%= f.input :ad_id, input_html: { value: ad.id }, as: :hidden %>
+
+            <%= f.input :reason, required: true, collection: ["First reason", "Second Reason"], prompt: "Please select reason" %>
+
+            <div class="form-actions padding_top_20px">
+              <%= f.button :submit, "Create!" %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="clearfix">
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

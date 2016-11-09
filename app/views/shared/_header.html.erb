@@ -1,0 +1,52 @@
+<section class="padding_top_20px padding_bottom_20px bottom_grey_border">
+  <div class="container">
+    <div class="col-sm-12">
+      <div class="col-sm-3">
+        <%= link_to root_path do %>
+          <%= image_tag("logo.png", class: "img-responsive") %>
+        <% end %>
+      </div>
+
+      <div class="col-sm-6 text-center">
+        <div class="btn-group padding_top_10px">
+          <ul class="list-inline">
+            <li>
+              <%= link_to "#{t('ads')}", ads_path %>
+            </li>
+            <% if current_user %>
+              <li>
+                <%= link_to "#{t('my_ads')}", my_ads_ads_path %>
+              </li>
+
+              <li>
+                <%= link_to "#{t('new_ad')}", new_ad_path, class: "btn btn-success" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-sm-3 text-right">
+        <div class="col-sm-12">
+          <% if current_user %>
+            <%= link_to current_user.email, edit_user_registration_path %>
+            |
+            <%= link_to("#{t('logout')}", destroy_user_session_path, :method => :delete) %>
+          <% else %>
+            <%= link_to "#{t('login')}", new_user_session_path %>
+            |
+            <%= link_to "#{t('sign_up')}", new_user_registration_path %>
+          <% end %>
+        </div>
+
+        <div class="col-sm-12 padding_top_10px">
+          <%= link_to "LV", url_for(:locale => :lv) %>
+          |
+          <%= link_to "RU", url_for(:locale => :ru) %>
+          |
+          <%= link_to "EN", url_for(:locale => :en) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

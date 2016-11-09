@@ -1,0 +1,59 @@
+<section>
+  <div class="container">
+    <div class="col-sm-12 padding_top_30px">
+
+      <%= form_for_filterrific @filterrific, :html => { :class => "filterrific_form" } do |f| %>
+
+        <div class="col-sm-3">
+          <%= f.text_field( :price_min, class: 'filterrific-periodically-observed' ) %>
+
+          <%= f.text_field( :price_max, class: 'filterrific-periodically-observed' ) %>
+
+        </div>
+
+        <div class="col-sm-3">
+          <%= f.select :year_min, @years, prompt: "Выберите год", include_blank: "-- #{t('any')} --", class: "chosen-select" %>
+
+          <%= f.select :year_max, @years, prompt: "Выберите год", include_blank: "-- #{t('any')} --", class: "chosen-select" %>
+
+          <%= f.select :engine_min, @capacity, prompt: "Выберите объем двигателя", include_blank: "-- #{t('any')} --", class: "chosen-select" %>
+        </div>
+
+        <div class="col-sm-3">
+          <%= f.select :engine_max, @capacity, prompt: "Выберите объем двигателя", include_blank: "-- #{t('any')} --", class: "chosen-select" %>
+
+          <%= f.select :with_engine_type, [ ["Дизель", "diesel"], ["Бензин", "gas"], ["Газ / Бензин", "lpg"], ["Гибрид", "hybrid"], ["Электрокар", "electro"] ], prompt: "Выберите тип двигателя", include_blank: "-- #{t('any')} --", class: "chosen-select" %>
+
+          <%= f.select :with_gearbox_type, [ ["Автомат", "auto"], ["Ручная", "manual"] ], prompt: "Выберите тип коробки", include_blank: "-- #{t('any')} --", class: "chosen-select" %>
+        </div>
+
+        <div class="col-sm-3">
+          <%= f.select :with_body_type, [ ["Седан", "sedan"], ["Универсал", "tourinf"], ["Купе", "coupe"], ["Хэтчбэк", "hatch"], ["Кабриолет", "cabrio"], ["Минивэн", "minivan"], ["Внедорожник", "offroad"] ], prompt: "Выберите тип кузова", include_blank: "-- #{t('any')} --", class: "chosen-select" %>
+
+          <%= f.select :with_color, [ ["Белый", "white"], ["Чёрный", "black"], ["Бордовый", "bordo"], ["Голубой", "light_blue"], ["Жёлтый", "yellow"], ["Зелёный", "green"], ["Коричневый", "brown"], ["Красный", "red"], ["Оранжевый", "orange"], ["Серебряный", "silver"], ["Серый", "grey"], ["Синий", "blue"], ["Фиолетовый", "violet"] ], prompt: "Выберите цвет авто", include_blank: "-- #{t('any')} --", class: "chosen-select" %>
+        </div>
+
+        <div>
+          <%= link_to(
+            'Reset filters',
+            reset_filterrific_url,
+          ) %>
+        </div>
+        <%# add an automated spinner to your form when the list is refreshed %>
+        <%= render_filterrific_spinner %>
+      <% end %>
+
+    </div>
+  </div>
+</section>
+
+
+<div id="filterrific_results">
+  <%= render(
+    partial: 'ads/ads_list',
+    locals: { ads: @ads }
+  ) %>
+</div>
+
+
+<!-- <%= render "ads_list", ads: @ads %> -->

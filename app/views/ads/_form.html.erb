@@ -1,0 +1,156 @@
+<section class="padding_top_100px padding_bottom_100px">
+  <div class="container">
+    <div class="col-sm-12">
+
+      <h2>Create new ad</h2>
+
+      <%= simple_form_for @ad, html: { id: "myForm", class: "dropzone", multipart: true } do |f| %>
+        <%= f.error_notification %>
+
+        <%= f.input :user_id, input_html: { value: current_user.id }, as: :hidden %>
+        <%= hidden_field_tag 'photos_token', @photos_token %>
+
+        <div class="form-inputs">
+          <%= f.input :car_make_id, collection: @car_makes, prompt: "Select make", input_html: { id: "category_id" } %>
+
+          <% if params[:action] == "edit" %>
+            <%= f.input :car_model_id, collection: @car_models, prompt: "Select a model", input_html: { id: "subcategories_select" } %>
+          <% else %>
+            <%= f.input :car_model_id, collection: @car_models, prompt: "Select a model", input_html: { id: "subcategories_select", disabled: true } %>
+          <% end %>
+
+          <hr>
+
+          <%= f.input :title, required: true, autofocus: true %>
+          <%= f.input :description, required: true %>
+          <%= f.input :phone, required: true %>
+          <%= f.input :phone_additional %>
+          <%= f.input :price, required: true %>
+          <%= f.input :email, required: true %>
+          <%= f.input :website %>
+          <%= f.input :country, as: :country, priority: [ "Latvia" ] %>
+
+          <div class="form-group country optional ad_city">
+            <label class="control-label city optional" for="ad_city">City</label>
+
+            <div class="form-group string optional ad_city not_lv_city_input do_not_show">
+              <input class="form-control string optional" type="text" value="" name="ad[city]" id="ad_city">
+            </div>
+
+            <select class="form-control city optional city_select" name="ad[city]" id="ad_city">
+
+              <% @main_cities.each do |city| %>
+                <option value="<%= city.name %>"><%= city.name %></option>
+              <% end %>
+
+              <option disabled="disabled" value="---------------">---------------</option>
+
+              <% @cities.each do |city| %>
+                <option value="<%= city.name %>"><%= city.name %></option>
+              <% end %>
+            </select>
+
+          </div>
+
+          <hr>
+
+          <div class="padding_top_10px padding_bottom_20px font_size_20px bold blue_text">
+            Выбор технических параметров
+          </div>
+
+          <%= f.simple_fields_for :ad_tech_spec do |builder| %>
+            <%= render 'ad_tech_spec_fields', f: builder %>
+          <% end %>
+
+          <hr>
+
+          <div class="padding_top_10px padding_bottom_20px font_size_20px bold blue_text">
+            Выбор опций сидений
+          </div>
+
+          <%= f.simple_fields_for :ad_seats_option do |builder| %>
+            <%= render 'ad_seats_option_fields', f: builder %>
+          <% end %>
+
+          <hr>
+
+          <div class="padding_top_10px padding_bottom_20px font_size_20px bold blue_text">
+            Выбор опций мультимедия
+          </div>
+
+          <%= f.simple_fields_for :ad_multimedia_option do |builder| %>
+            <%= render 'ad_multimedia_option_fields', f: builder %>
+          <% end %>
+
+          <hr>
+
+          <div class="padding_top_10px padding_bottom_20px font_size_20px bold blue_text">
+            Выбор опций вождения
+          </div>
+
+          <%= f.simple_fields_for :ad_driving_option do |builder| %>
+            <%= render 'ad_driving_option_fields', f: builder %>
+          <% end %>
+
+          <hr>
+
+          <div class="padding_top_10px padding_bottom_20px font_size_20px bold blue_text">
+            Выбор опций света
+          </div>
+
+          <%= f.simple_fields_for :ad_lights_option do |builder| %>
+            <%= render 'ad_lights_option_fields', f: builder %>
+          <% end %>
+
+          <hr>
+
+          <div class="padding_top_10px padding_bottom_20px font_size_20px bold blue_text">
+            Выбор опций безопастности
+          </div>
+
+          <%= f.simple_fields_for :ad_safety_option do |builder| %>
+            <%= render 'ad_safety_option_fields', f: builder %>
+          <% end %>
+
+          <hr>
+
+          <div class="padding_top_10px padding_bottom_20px font_size_20px bold blue_text">
+            Выбор опций комфорта
+          </div>
+
+          <%= f.simple_fields_for :ad_comfort_option do |builder| %>
+            <%= render 'ad_comfort_option_fields', f: builder %>
+          <% end %>
+
+          <hr>
+
+          <div class="padding_top_10px padding_bottom_20px font_size_20px bold blue_text">
+            Выбор опций руля
+          </div>
+
+          <%= f.simple_fields_for :ad_steering_option do |builder| %>
+            <%= render 'ad_steering_option_fields', f: builder %>
+          <% end %>
+
+          <hr>
+
+          <div class="fallback">
+            <%= file_field_tag "images[]", type: :file, multiple: true %>
+          </div>
+
+        </div>
+
+        <div class="form-actions padding_top_20px">
+          <%= submit_tag "#{t('create')}", 'data-disable-with' => "#{t('disable')}", class: "ad_submit_btn btn btn-lg btn-success" %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</section>
+
+<%= content_for(:javascript) do %>
+
+  <%= render 'dropzone' %>
+
+<% end %>

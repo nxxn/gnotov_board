@@ -1,0 +1,42 @@
+<section class="padding_top_20px padding_bottom_20px bottom_grey_border">
+  <div class="container">
+    <div class="col-sm-12">
+      <div class="col-sm-3">
+        <%= link_to root_path do %>
+          <%= image_tag("logo.png", class: "img-responsive") %>
+        <% end %>
+      </div>
+
+      <div class="col-sm-6 text-center">
+        <div class="btn-group">
+          <ul class="list-inline">
+            <li>
+              <%= link_to "Ads", admin_ads_path %>
+            </li>
+            <li>
+              <%= link_to "Users", admin_users_path %>
+            </li>
+            <li>
+              <%= link_to "Models", admin_car_makes_path %>
+            </li>
+            <li>
+              <%= link_to "Messages", admin_messages_path %>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-sm-3 text-right">
+        <% if current_user %>
+          <%= current_user.email %>
+          |
+          <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+        <% else %>
+          <%= link_to "Login", new_user_session_path %>
+          |
+          <%= link_to "Sign Up", new_user_registration_path %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

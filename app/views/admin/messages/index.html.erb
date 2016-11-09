@@ -1,0 +1,19 @@
+<section class="padding_top_50px padding_bottom_50px">
+  <div class="container">
+    <% @messages.each_with_index do |message, index| %>
+      <div class="col-sm-12">
+        <b>
+          <%= index + 1 %>
+        </b>
+        <br>
+        Email: <%= message.email %>
+        <br>
+        Phone: <%= message.phone %>
+        <br>
+        Question: <%= message.question %>
+
+        <hr>
+      </div>
+    <% end %>
+  </div>
+</section>

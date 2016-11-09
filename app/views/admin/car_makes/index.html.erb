@@ -1,0 +1,52 @@
+<section>
+  <div class="container">
+    <div class="col-sm-12 padding_top_50px">
+
+      <div class="col-sm-6">
+        <div class="col-sm-12 font_size_24px text-center">
+          Car Manufacturer
+        </div>
+
+        <div class="col-sm-12">
+          <%= simple_form_for @car_make, url: admin_new_car_make_path do |f| %>
+            <%= f.error_notification %>
+
+            <%= f.input :name %>
+
+            <div class="form-actions padding_top_20px">
+              <%= f.button :submit, "Create" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="col-sm-6 left_grey_border">
+        <div class="col-sm-12 font_size_24px text-center">
+          Car Model
+        </div>
+
+        <div class="col-sm-12 padding_bottom_20px">
+          <%= simple_form_for @car_model, url: admin_new_car_model_path do |f| %>
+            <%= f.error_notification %>
+
+            <%= f.input :car_make_id, collection: @car_makes, prompt: "Select car manufacturer" %>
+            <%= f.input :name %>
+
+            <div class="form-actions padding_top_20px">
+              <%= f.button :submit, "Create" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-sm-12 padding_top_20px">
+      <hr>
+    </div>
+
+    <div id="car_makers" class="col-sm-12 padding_bottom_50px">
+      <%= render 'car_makes_list', car_makes: @car_makes %>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+<section class="padding_top_30px padding_bottom_50px">
+  <div class="container">
+    <div class="col-sm-12">
+
+      <% ads.each_slice(3) do |ad_row| %>
+        <div class="col-sm-12 no_side_padding padding_top_20px">
+          <% ad_row.each_with_index do |ad, index| %>
+
+            <div class="col-sm-4 padding_left_right_10px">
+              <div class="col-sm-12 no_side_padding grey_border padding_bottom_10px">
+
+                <div class="col-sm-12 no_side_padding">
+                  <% if ad.ad_photos.count > 0 %>
+                    <%= image_tag(ad.ad_photos.first.image(:medium), class: "img-responsive") %>
+                  <% end %>
+                </div>
+
+                <div class="col-sm-12 padding_top_20px font_size_18px">
+                  <%= ad.title %>
+                </div>
+
+                <div class="col-sm-12 padding_top_10px">
+                  <%= truncate(ad.description, :ommision => "...", :length => 100) %>
+                </div>
+
+                <div class="col-sm-12 padding_top_10px font_size_22px">
+                  <div class="col-sm-6 no_side_padding">
+                    <%= ad.price %>$
+                  </div>
+
+                  <div class="col-sm-6 no_side_padding text-right">
+                    <%= link_to "#{t('show_more')}", ad_path(ad), class: "btn btn-info" %>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+    </div>
+
+    <div class="col-sm-12 padding_top_20px">
+      <%= will_paginate ads  %>
+    </div>
+  </div>
+</section>

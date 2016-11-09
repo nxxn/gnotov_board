@@ -1,0 +1,260 @@
+<%
+  meta title: "#{@ad.car_make.name + ' ' + @ad.car_model.name + ' ' + @ad.price.to_s + '€ ' + @ad.title}",
+       description: "#{@ad.title}",
+       og: {
+        title: "#{@ad.car_make.name + ' ' + @ad.car_model.name + ' ' + @ad.price.to_s + '€ ' + @ad.title}",
+        description: "#{@ad.description}"
+       }
+%>
+
+<section class="padding_bottom_100px">
+  <div class="container">
+    <div class="col-sm-12">
+
+      <% if flash.notice %>
+        <div class="alert alert-success"><P><%= flash.notice %></p></div>
+      <% end %>
+
+      <div class="col-sm-12 no_side_padding padding_top_20px">
+        <div class="col-sm-6 no_side_padding">
+          <span class="block font_size_22px font_weight_500">
+            <%= @ad.ad_tech_spec.built_year %>
+            <%= @ad.car_make.name %>
+            <%= @ad.car_model.name %>
+          </span>
+
+          <span class="bloack font_size_18px grey_text">
+            <%= @ad.ad_tech_spec.mileage %> km
+          </span>
+
+          <span class="block font_size_18px">
+            <%= @ad.ad_tech_spec.engine_cc %> <%= @ad.ad_tech_spec.engine_type %>
+          </span>
+        </div>
+
+        <div class="col-sm-6 text-right no_side_padding padding_top_10px">
+          <span class="font_size_32px font_weight_500">
+            <%= @ad.price %> €
+          </span>
+        </div>
+      </div>
+
+      <div class="col-sm-12 no_side_padding padding_top_20px">
+        <div class="col-sm-12 no_side_padding">
+          <% if @ad.ad_photos.count > 0 %>
+            <%= image_tag(@ad.ad_photos.first.image(:medium), class: "img-responsive") %>
+          <% end %>
+        </div>
+
+        <div class="col-sm-12 padding_top_10px no_side_padding">
+          <% @ad.ad_photos.each_slice(4) do |photo_slice| %>
+            <div class="col-sm-12 no_side_padding padding_top_20px row_margin">
+              <% photo_slice.each do |ad_photo| %>
+                <div class="col-sm-3">
+                  <%= image_tag(ad_photo.image(:thumb), class: "img-responsive") %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="col-sm-12 no_side_padding padding_top_20px">
+        <div class="col-sm-4">
+
+          <div class="col-sm-12 no_side_padding">
+            <span class="block font_size_15px">
+              Engine Type
+            </span>
+
+            <span class="block grey_text">
+              <%= @ad.ad_tech_spec.engine_type %>
+            </span>
+          </div>
+
+          <div class="col-sm-12 no_side_padding padding_top_10px">
+            <span class="block font_size_15px">
+              Engine Capacity
+            </span>
+
+            <span class="block grey_text">
+              <%= @ad.ad_tech_spec.engine_cc %>
+            </span>
+          </div>
+
+          <div class="col-sm-12 no_side_padding padding_top_10px">
+            <span class="block font_size_15px">
+              Mileage
+            </span>
+
+            <span class="block grey_text">
+              <%= @ad.ad_tech_spec.mileage %> km
+            </span>
+          </div>
+
+        </div>
+
+        <div class="col-sm-4">
+          <div class="col-sm-12 no_side_padding">
+            <span class="block font_size_15px">
+              VIN
+            </span>
+
+            <span class="block grey_text">
+              <%= @ad.ad_tech_spec.vin_number %>
+            </span>
+          </div>
+
+          <div class="col-sm-12 no_side_padding padding_top_10px">
+            <span class="block font_size_15px">
+              Transmission
+            </span>
+
+            <span class="block grey_text">
+              <%= @ad.ad_tech_spec.gearbox %>
+            </span>
+          </div>
+
+          <div class="col-sm-12 no_side_padding padding_top_10px">
+            <span class="block font_size_15px">
+              Fuel type
+            </span>
+
+            <span class="block grey_text">
+              <%= @ad.ad_tech_spec.engine_type %>
+            </span>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="col-sm-12 no_side_padding">
+            <span class="block font_size_15px">
+              Built Year
+            </span>
+
+            <span class="block grey_text">
+              <%= @ad.ad_tech_spec.built_year %>
+            </span>
+          </div>
+
+          <div class="col-sm-12 no_side_padding padding_top_10px">
+            <span class="block font_size_15px">
+              Inspection Date
+            </span>
+
+            <span class="block grey_text">
+              <%= @ad.ad_tech_spec.inspection_month %>.<%= @ad.ad_tech_spec.inspection_year %>
+            </span>
+          </div>
+
+          <div class="col-sm-12 no_side_padding padding_top_10px">
+            <span class="block font_size_15px">
+              Power
+            </span>
+
+            <span class="block grey_text">
+              <%= @ad.ad_tech_spec.power %>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-sm-12 no_side_padding">
+        <div class="col-sm-8 no_side_padding">
+          <div class="col-sm-12 padding_top_30px font_size_18px font_weight_600">
+            <%= @ad.title %>
+          </div>
+
+          <div class="col-sm-12 padding_top_10px font_size_16px">
+            <%= @ad.description %>
+          </div>
+        </div>
+
+        <div class="col-sm-4 no_side_padding">
+          <div class="col-sm-12 no_side_padding padding_top_30px font_size_18px">
+            <%= @ad.phone %>
+          </div>
+
+          <% unless @ad.phone_additional.blank? %>
+            <div class="col-sm-12 no_side_padding padding_top_10px font_size_18px">
+              <%= @ad.phone_additional %>
+            </div>
+          <% end %>
+
+          <% unless @ad.email.blank? %>
+            <div class="col-sm-12 no_side_padding padding_top_10px font_size_18px">
+              <%= @ad.email %>
+            </div>
+          <% end %>
+
+          <% unless @ad.website.blank? %>
+            <div class="col-sm-12 no_side_padding padding_top_10px font_size_18px">
+              <%= @ad.website %>
+            </div>
+          <% end %>
+
+          <div class="col-sm-12 no_side_padding padding_top_10px font_size_18px">
+            <%= @ad.country_name %>, <%= @ad.city %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 no_side_padding padding_top_50px">
+
+
+        <div class="col-sm-4">
+          <% if Time.now < @ad.created_at + 2.days %>
+
+            <% if current_user && current_user.id == @ad.user_id %>
+              <%= link_to "Edit ad", edit_ad_path, class: "btn btn-warning pull-right" %>
+            <% end %>
+
+          <% else %>
+
+            <!-- Check if user can edit ad -->
+            <% if current_user && current_user.id == @ad.user_id %>
+              <!-- Check if ad stopped -->
+              <% if @ad.active? %>
+                <%= link_to "Stop ad", stop_ad_path(id: @ad.id), class: "btn btn-warning pull-right" %>
+              <% else %>
+                <%= link_to "Edit ad", edit_ad_path, class: "btn btn-warning pull-right" %>
+                <%= link_to "Start ad", start_ad_path(id: @ad.id), class: "btn btn-success pull-right" %>
+              <% end %>
+              <!-- /Check if ad running -->
+            <% end %>
+            <!-- Check if user can edit ad -->
+
+          <% end %>
+
+          <% if current_user %>
+            <% if current_user.favorites.exists?(@ad.id) %>
+              <%= link_to "unfavorite", favorite_ad_path(@ad, type: "unfavorite"), method: :put %>
+            <% else %>
+              <%= link_to "favorite",   favorite_ad_path(@ad, type: "favorite"), method: :put %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+
+
+      <% if current_user && current_user.id != @ad.user_id %>
+        <button type="button" class="font_size_16px font_weight_500 btn btn-success" data-toggle="modal" data-target="#servicesModal">
+          Подать жалобу
+        </button>
+
+        <%= render 'shared/modal', ad: @ad %>
+      <% end %>
+
+    </div>
+
+    <div class="col-sm-12 padding_top_30px">
+      <hr>
+    </div>
+
+    <div class="col-sm-12 padding_top_20px">
+      <div class="pluso" data-background="transparent" data-options="medium,square,line,horizontal,nocounter,theme=04" data-services="facebook,google,twitter"></div>
+    </div>
+  </div>
+</section>

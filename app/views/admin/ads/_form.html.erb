@@ -1,0 +1,36 @@
+<section class="padding_top_100px padding_bottom_100px">
+  <div class="container">
+    <div class="col-sm-12">
+
+      <h2>Create new ad</h2>
+
+      <%= simple_form_for @ad do |f| %>
+        <%= f.error_notification %>
+
+        <div class="form-inputs">
+          <%= f.input :title, required: true, autofocus: true %>
+          <%= f.input :description, required: true %>
+          <%= f.input :phone, required: true %>
+          <%= f.input :phone_additional %>
+          <%= f.input :price, required: true %>
+          <%= f.input :email, required: true %>
+          <%= f.input :website %>
+
+          <div class="padding_bottom_10px font_size_20px bold blue_text">
+            Add your car photos
+          </div>
+          <%= f.simple_fields_for :ad_photos do |builder| %>
+            <%= render 'ad_photo_fields', f: builder %>
+          <% end %>
+
+          <%= link_to_add_fields "Add photo", f, :ad_photos %>
+          </div>
+
+        <div class="form-actions padding_top_20px">
+          <%= f.button :submit, "Create!" %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</section>

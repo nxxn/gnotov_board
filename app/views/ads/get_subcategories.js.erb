@@ -1,0 +1,3 @@
+$("#subcategories_select").empty().append("<%= escape_javascript(render(:partial => "subcategory", :collection => @car_models, :as => :cat)) %>");
+
+$("#subcategories_select").prop("disabled", false);

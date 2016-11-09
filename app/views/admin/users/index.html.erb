@@ -1,0 +1,87 @@
+<section>
+  <div class="container">
+    <div class="col-sm-12 font_size_36px padding_top_50px text-center">
+      Users
+    </div>
+
+    <div class="col-sm-12 padding_top_30px padding_bottom_30px">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>
+              #
+            </th>
+
+            <th>
+              Email
+            </th>
+
+            <th>
+              Full Name
+            </th>
+
+            <th>
+              Money Spent
+            </th>
+
+            <th>
+              Ads Placed
+            </th>
+
+            <th class="text-right">
+              Actions
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @users.each_with_index do |user, index| %>
+            <tr class="">
+              <th scope="row">
+                <%= @users.length - 1 - index %>
+                <% if user.dealer? %>
+                  <i class="fa fa-car padding_left_right_10px dark_green_text" aria-hidden="true"></i>
+                <% end %>
+              </th>
+
+              <td>
+                <%= user.email %>
+              </td>
+
+              <td>
+                <%= user.first_name %>
+                <%= user.last_name %>
+              </td>
+
+              <td>
+                -
+              </td>
+
+              <td>
+                <%= user.ads.count %>
+              </td>
+
+              <td class="text-right admin_table_actions">
+                <%= link_to admin_stop_user_path(id: user.id), class: "padding_left_right_10px font_size_18px" do %>
+                  <% if user.active? %>
+                    <i class="fa fa-ban red_text" aria-hidden="true"></i>
+                  <% else %>
+                    <i class="fa fa-play green_text" aria-hidden="true"></i>
+                  <% end %>
+                <% end %>
+                |
+                <%= link_to edit_admin_user_path(user), class: "padding_left_right_10px font_size_18px" do %>
+                  <i class="fa fa-pencil orange_text" aria-hidden="true"></i>
+                <% end %>
+                |
+                <%= link_to admin_user_path(user), class: "padding_left_10px padding_right_5px font_size_18px", method: :delete do %>
+                  <i class="fa fa-trash-o black_text" aria-hidden="true"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
