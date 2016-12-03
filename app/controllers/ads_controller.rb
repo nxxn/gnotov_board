@@ -33,6 +33,8 @@ class AdsController < ApplicationController
     @ad.build_ad_comfort_option
     @ad.build_ad_steering_option
 
+    @ad.build_ad_extra
+
     @car_makes = CarMake.all
     @car_models = CarModel.all
 
@@ -190,7 +192,9 @@ class AdsController < ApplicationController
 
     ad_comfort_option_attributes: [:id, :headup_display, :rain_sensor, :self_steering, :webasto, :keyless_entry, :softclose, :electric_windows, :electric_mirrors, :electric_trunk, :anti_dazzle_mirrors, :air_suspension, :air_conditioning, :auto_climate, :sunroof, :panoramic_roof, :isofix, :second_wheels, :tow_bar],
 
-    ad_steering_option_attributes: [:id, :heated_st_wheel, :electric_st_wheel, :regulated_st_wheel, :multi_st_wheel, :memory_st_wheel, :wood_st_wheel])
+    ad_steering_option_attributes: [:id, :heated_st_wheel, :electric_st_wheel, :regulated_st_wheel, :multi_st_wheel, :memory_st_wheel, :wood_st_wheel],
+
+    ad_extra_attributes: [:id, :bold_border, :be_on_top, :be_on_top_of_search, :special_block, :be_on_home, :luxury_position, :urgently])
   end
 
   def ad_issue_params

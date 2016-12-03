@@ -1,3 +1,5 @@
+<% resource.build_dealer_info if resource.dealer_info.nil? %>
+
 <section>
   <div class="container">
     <div class="col-sm-12">
@@ -14,7 +16,20 @@
             <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
           <% end %>
 
-          <%= f.input :dealer %>
+          <%= f.input :first_name %>
+          <%= f.input :last_name %>
+          <%= f.input :phone %>
+          <%= f.input :avatar %>
+
+          <%= f.input :dealer, input_html: { class: 'dealer_button' } %>
+
+          <% if resource.dealer? %>
+            <div class="dealer_inputs">
+              <%= f.simple_fields_for :dealer_info do |builder| %>
+                <%= render 'dealer_info_fields', f: builder %>
+              <% end %>
+            </div>
+          <% end %>
 
           <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
           <%= f.input :password_confirmation, required: false %>

@@ -2,10 +2,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 # before_action :configure_sign_up_params, only: [:create]
 # before_action :configure_account_update_params, only: [:update]
 
-  # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  #GET /resource/sign_up
+  def new
+    super
+  end
 
   # POST /resource
   # def create
@@ -61,10 +61,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def sign_up_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :phone, :avatar, :dealer, :dealer_name, :dealer_address, :dealer_phone, :dealer_description, :dealer_logo)
+    params.require(resource_name).permit(:email, :password, :password_confirmation, :first_name, :last_name, :phone, :avatar, :dealer, dealer_info_attributes: [ :id, :dealer_name, :dealer_address, :dealer_phone, :dealer_description, :dealer_logo])
   end
 
   def account_update_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :current_password, :first_name, :last_name, :phone, :avatar, :dealer, :dealer_name, :dealer_address, :dealer_phone, :dealer_description, :dealer_logo)
+    params.require(resource_name).permit(:email, :password, :password_confirmation, :current_password, :first_name, :last_name, :phone, :avatar, :dealer, dealer_info_attributes: [ :id, :dealer_name, :dealer_address, :dealer_phone, :dealer_description, :dealer_logo ])
   end
 end

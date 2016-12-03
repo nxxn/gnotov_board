@@ -134,6 +134,16 @@
 
           <hr>
 
+          <div class="padding_top_10px padding_bottom_20px font_size_20px bold blue_text">
+            Выбор экстр
+          </div>
+
+          <%= f.simple_fields_for :ad_extra do |builder| %>
+            <%= render 'ad_extra_fields', f: builder %>
+          <% end %>
+
+          <hr>
+
           <div class="fallback">
             <%= file_field_tag "images[]", type: :file, multiple: true %>
           </div>

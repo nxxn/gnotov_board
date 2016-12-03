@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026184822) do
+ActiveRecord::Schema.define(version: 20161111214106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,19 @@ ActiveRecord::Schema.define(version: 20161026184822) do
     t.boolean "spare_wheel",             default: false
     t.boolean "tire_pressure",           default: false
     t.boolean "start_stop",              default: false
+  end
+
+  create_table "ad_extras", force: :cascade do |t|
+    t.integer  "ad_id"
+    t.boolean  "bold_border"
+    t.boolean  "be_on_top"
+    t.boolean  "be_on_top_of_search"
+    t.boolean  "special_block"
+    t.boolean  "be_on_home"
+    t.boolean  "luxury_position"
+    t.boolean  "urgently"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "ad_issues", force: :cascade do |t|
@@ -180,6 +193,20 @@ ActiveRecord::Schema.define(version: 20161026184822) do
     t.datetime "updated_at",                 null: false
   end
 
+  create_table "dealer_infos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "dealer_name"
+    t.string   "dealer_address"
+    t.string   "dealer_phone"
+    t.text     "dealer_description"
+    t.string   "dealer_logo_file_name"
+    t.string   "dealer_logo_content_type"
+    t.integer  "dealer_logo_file_size"
+    t.datetime "dealer_logo_updated_at"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "favorite_ads", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "ad_id"
@@ -204,28 +231,20 @@ ActiveRecord::Schema.define(version: 20161026184822) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
-    t.string   "email",                    default: "",    null: false
-    t.string   "encrypted_password",       default: "",    null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",            default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.boolean  "dealer",                   default: false
-    t.string   "dealer_name",              default: ""
-    t.string   "dealer_address",           default: ""
-    t.string   "dealer_phone",             default: ""
-    t.text     "dealer_description",       default: ""
-    t.string   "dealer_logo_file_name"
-    t.string   "dealer_logo_content_type"
-    t.integer  "dealer_logo_file_size"
-    t.datetime "dealer_logo_updated_at"
-    t.boolean  "active",                   default: true
+    t.boolean  "dealer",                 default: false
+    t.boolean  "active",                 default: true
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

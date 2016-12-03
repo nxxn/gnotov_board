@@ -30,6 +30,8 @@ Rails.application.routes.draw do
 
     get 'get_subcategories', to: 'ads#get_subcategories', defaults: { format: "js" }
 
+    get 'show_dealer', to: 'dealers#show'
+
   end
 
   namespace :admin do

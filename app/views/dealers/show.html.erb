@@ -1,0 +1,24 @@
+<section>
+  <div class="container">
+    <div class="col-sm-12">
+      Dealer Info Page
+    </div>
+
+    <div class="col-sm-12 no_side_padding padding_top_30px font_size_18px">
+      <%= @dealer.dealer_info.dealer_name %>
+    </div>
+    <div class="col-sm-12 no_side_padding padding_top_30px font_size_18px">
+      <%= @dealer.dealer_info.dealer_address %>
+    </div>
+    <div class="col-sm-12 no_side_padding padding_top_30px font_size_18px">
+      <%= @dealer.dealer_info.dealer_phone %>
+    </div>
+    <div class="col-sm-12 no_side_padding padding_top_30px font_size_18px">
+      <%= @dealer.dealer_info.dealer_description %>
+    </div>
+    <div class="col-sm-12 no_side_padding padding_top_30px font_size_18px">
+      <%= image_tag(@dealer.dealer_info.dealer_logo(:thumb), class: "img-responsive") %>
+    </div>
+
+  </div>
+</section>

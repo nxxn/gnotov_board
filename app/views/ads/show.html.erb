@@ -172,6 +172,24 @@
         </div>
 
         <div class="col-sm-4 no_side_padding">
+          <% if @ad.user.dealer? %>
+            <div class="col-sm-12 no_side_padding padding_top_30px font_size_18px">
+              <%= @ad.user.dealer_info.dealer_name %>
+            </div>
+            <div class="col-sm-12 no_side_padding padding_top_30px font_size_18px">
+              <%= @ad.user.dealer_info.dealer_address %>
+            </div>
+            <div class="col-sm-12 no_side_padding padding_top_30px font_size_18px">
+              <%= @ad.user.dealer_info.dealer_phone %>
+            </div>
+            <div class="col-sm-12 no_side_padding padding_top_30px font_size_18px">
+              <%= image_tag(@ad.user.dealer_info.dealer_logo(:thumb), class: "img-responsive") %>
+            </div>
+
+            <div class="col-sm-12 no_side_padding padding_top_30px font_size_18px">
+              <%= link_to "Show Dealer Info", show_dealer_path(dealer: @ad.user.id) %>
+            </div>
+          <% end %>
           <div class="col-sm-12 no_side_padding padding_top_30px font_size_18px">
             <%= @ad.phone %>
           </div>

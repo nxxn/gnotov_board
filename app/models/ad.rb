@@ -16,6 +16,7 @@ class Ad < ApplicationRecord
     ]
   )
 
+  # Filterrific scopes
   scope :with_engine_type, lambda { |engine|
     where( ad_tech_specs: { engine_type: engine }).joins(:ad_tech_spec)
   }
@@ -56,8 +57,18 @@ class Ad < ApplicationRecord
     where( 'price <= ?', price_max_select.to_i )
   }
 
+  # Regular scopes
   scope :published, -> { where(active: true, paid: true) }
   scope :paid_not_active, -> { where(active: false, paid: true) }
+
+  # Extras scopes
+  scope :bold_border_extra, -> { where('bold_border = ?', true).joins(:ad_extra) }
+  scope :be_on_top_extra, -> { where('be_on_top = ?', true).joins(:ad_extra) }
+  scope :be_on_top_of_search_extra, -> { where('be_on_top_of_search = ?', true).joins(:ad_extra) }
+  scope :special_block_extra, -> { where('special_block = ?', true).joins(:ad_extra) }
+  scope :be_on_home_extra, -> { where('be_on_home = ?', true).joins(:ad_extra) }
+  scope :luxury_position_extra, -> { where('luxury_position = ?', true).joins(:ad_extra) }
+  scope :urgently_extra, -> { where('urgently = ?', true).joins(:ad_extra) }
 
   belongs_to :user
   belongs_to :car_make
@@ -72,6 +83,8 @@ class Ad < ApplicationRecord
   has_one :ad_lights_option, dependent: :destroy
   has_one :ad_steering_option, dependent: :destroy
   has_one :ad_tech_spec, dependent: :destroy
+
+  has_one :ad_extra, dependent: :destroy
 
   has_many :favorite_ads, dependent: :destroy
   has_many :favorited_by, through: :favorite_ads, source: :user
@@ -88,6 +101,8 @@ class Ad < ApplicationRecord
   accepts_nested_attributes_for :ad_lights_option, allow_destroy: true
   accepts_nested_attributes_for :ad_steering_option, allow_destroy: true
   accepts_nested_attributes_for :ad_tech_spec, allow_destroy: true
+
+  accepts_nested_attributes_for :ad_extra, allow_destroy: true
 
   accepts_nested_attributes_for :car_make, allow_destroy: true
   accepts_nested_attributes_for :car_model, allow_destroy: true

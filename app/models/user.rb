@@ -11,11 +11,11 @@ class User < ApplicationRecord
 
   has_many :ad_issues, dependent: :destroy
 
+  has_one :dealer_info, inverse_of: :user, dependent: :destroy
+
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
-  has_attached_file :dealer_logo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
-
-  validates_attachment_content_type :dealer_logo, content_type: /\Aimage\/.*\z/
+  accepts_nested_attributes_for :dealer_info, allow_destroy: true
 end
